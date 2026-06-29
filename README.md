@@ -14,7 +14,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-⚠️ **IN PROGRESS** — 5/12 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
+⚠️ **IN PROGRESS** — 6/12 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
@@ -22,8 +22,8 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 🥈 | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | 88.4 | — | 23 | — |
 | 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | — | 15 | 22 |
 | 4 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | 84.1 | — | 34 | 44 |
-| 5 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
-| — | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | — | — | — | — |
+| 5 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | — | — | — |
+| 6 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
 | — | IBM-Granite-8B | IBM / Red Hat | 8B | — | — | — | — |
 | — | Phi-4 | Microsoft | 14B | — | — | — | — |
 | — | Gemma-4-12B | Google 2026 | 12B | — | — | — | — |

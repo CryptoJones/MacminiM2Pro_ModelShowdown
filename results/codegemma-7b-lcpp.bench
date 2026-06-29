@@ -1,0 +1,2 @@
+| gemma 7B Q4_K - Medium         |   4.96 GiB |     8.54 B | MTL,BLAS   |       6 |           pp512 |        249.04 ± 0.40 |
+| gemma 7B Q4_K - Medium         |   4.96 GiB |     8.54 B | MTL,BLAS   |       6 |           tg128 |         25.45 ± 0.15 |

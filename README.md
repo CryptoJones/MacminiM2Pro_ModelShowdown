@@ -27,7 +27,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 7 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | — | 26 | — |
 | — | Phi-4 | Microsoft | 14B | — | — | — | — |
 | — | Gemma-4-12B | Google 2026 | 12B | — | — | — | — |
-| — | CodeGemma-7B | Google 2024 | 7B | — | — | — | — |
+| — | CodeGemma-7B | Google 2024 | 7B | — | — | 25 | — |
 | — | gpt-oss-20b | OpenAI | 20B (MoE) | — | — | — | — |
 | — | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | — | — | — | — |
 

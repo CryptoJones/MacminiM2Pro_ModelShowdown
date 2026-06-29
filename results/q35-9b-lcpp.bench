@@ -1,0 +1,2 @@
+| qwen35 9B Q4_K - Medium        |   5.74 GiB |     9.20 B | MTL,BLAS   |       6 |           pp512 |        222.10 ± 0.80 |
+| qwen35 9B Q4_K - Medium        |   5.74 GiB |     9.20 B | MTL,BLAS   |       6 |           tg128 |         12.07 ± 0.05 |

@@ -15,11 +15,12 @@ META = {  # canonical -> (vendor/gen, params)
  "Gemma-4-12B": ("Google 2026", "12B"),
  "CodeGemma-7B": ("Google 2024", "7B"),
  "gpt-oss-20b": ("OpenAI", "20B (MoE)"),
+ "Gemma-4-12B-Coder": ("community finetune of Gemma-4-12B (fable5/composer2.5)", "12B"),
 }
 NAME = {'q14b':'Qwen2.5-Coder-14B','qwen25c-14b':'Qwen2.5-Coder-14B','q7b':'Qwen2.5-Coder-7B','qwen25c-7b':'Qwen2.5-Coder-7B',
  'q35-9b':'Qwen3.5-9B','dsc':'DeepSeek-V2-Lite','dsc-lite':'DeepSeek-V2-Lite','ornith-9b':'ornith-9B',
  'nemotron-9b':'NVIDIA-Nemotron-9B','granite-8b':'IBM-Granite-8B','codegemma-7b':'CodeGemma-7B',
- 'gemma4-12b':'Gemma-4-12B','phi4':'Phi-4','gptoss-20b':'gpt-oss-20b'}
+ 'gemma4-12b':'Gemma-4-12B','phi4':'Phi-4','gptoss-20b':'gpt-oss-20b','gemmacoder':'Gemma-4-12B-Coder'}
 def canon(s):
     mlx = s.endswith('-mlx'); s = s[:-4] if mlx else s
     s = s.replace('@llamacpp','').replace('-lcpp','').replace('@MLX','')

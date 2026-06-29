@@ -14,19 +14,21 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
+⚠️ **IN PROGRESS** — 5/11 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
+
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
-| 🥇 | **Qwen3.5-9B** | Alibaba 2026 (reasoning/MTP) | 9B | **90.2** | — | 12 | — |
-| 🥈 | **ornith-9B** | DeepReinforce 2026 (Qwen3.5-based) | 9B | **88.4** | — | 23 | — |
+| 🥇 | Qwen3.5-9B | Alibaba 2026 (reasoning/MTP) | 9B | 90.2 | — | 12 | — |
+| 🥈 | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | 88.4 | — | 23 | — |
 | 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | — | 15 | 22 |
 | 4 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | 84.1 | — | 34 | 44 |
-| 5 | DeepSeek-Coder-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | **69** | **87** |
-| — | NVIDIA-Nemotron-Nano-9B-v2 | NVIDIA 2026 (reasoning) | 9B | ⏳ | — | — | — |
-| — | IBM Granite-3.3-8B | IBM / Red Hat | 8B | ⏳ | — | — | — |
-| — | Microsoft Phi-4 | Microsoft | 14B | ⏳ | — | — | — |
-| — | Gemma-4-12B | Google 2026 | 12B | ⏳ | — | — | — |
-| — | CodeGemma-7B | Google 2024 | 7B | ⏳ | — | — | — |
-| — | gpt-oss-20b | OpenAI | 20B (MoE) | ⏳ | — | — | — |
+| 5 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
+| — | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | — | — | — | — |
+| — | IBM-Granite-8B | IBM / Red Hat | 8B | — | — | — | — |
+| — | Phi-4 | Microsoft | 14B | — | — | — | — |
+| — | Gemma-4-12B | Google 2026 | 12B | — | — | — | — |
+| — | CodeGemma-7B | Google 2024 | 7B | — | — | — | — |
+| — | gpt-oss-20b | OpenAI | 20B (MoE) | — | — | — | — |
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.

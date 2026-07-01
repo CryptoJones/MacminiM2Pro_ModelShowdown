@@ -1,0 +1,2 @@
+| gpt-oss 20B MXFP4 MoE          |  11.27 GiB |    20.91 B | MTL,BLAS   |       6 |           pp512 |        574.78 ± 1.24 |
+| gpt-oss 20B MXFP4 MoE          |  11.27 GiB |    20.91 B | MTL,BLAS   |       6 |           tg128 |         51.74 ± 0.01 |

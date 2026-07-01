@@ -1,1 +1,2 @@
-| nemotron_h 9B Q4_K - Medium    |   6.07 GiB |     8.89 B | MTL,BLAS   |       6 |           pp512 |        178.87 ± 0.56 |
+| nemotron_h 9B Q4_K - Medium    |   6.07 GiB |     8.89 B | MTL,BLAS   |       6 |           pp512 |        179.42 ± 0.76 |
+| nemotron_h 9B Q4_K - Medium    |   6.07 GiB |     8.89 B | MTL,BLAS   |       6 |           tg128 |         16.46 ± 0.25 |

@@ -1,2 +1,2 @@
-| granite 3B Q4_K - Medium       |   4.60 GiB |     8.17 B | MTL,BLAS   |       6 |           pp512 |        242.15 ± 0.43 |
-| granite 3B Q4_K - Medium       |   4.60 GiB |     8.17 B | MTL,BLAS   |       6 |           tg128 |         26.34 ± 0.19 |
+| granite 3B Q4_K - Medium       |   4.60 GiB |     8.17 B | MTL,BLAS   |       6 |           pp512 |        245.00 ± 0.04 |
+| granite 3B Q4_K - Medium       |   4.60 GiB |     8.17 B | MTL,BLAS   |       6 |           tg128 |         29.73 ± 0.02 |

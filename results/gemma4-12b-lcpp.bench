@@ -1,1 +1,2 @@
-| gemma4 ?B Q4_K - Medium        |   7.12 GiB |    11.91 B | MTL,BLAS   |       6 |           pp512 |    3595.98 ± 5938.28 |
+| gemma4 ?B Q4_K - Medium        |   7.12 GiB |    11.91 B | MTL,BLAS   |       6 |           pp512 |        169.57 ± 0.04 |
+| gemma4 ?B Q4_K - Medium        |   7.12 GiB |    11.91 B | MTL,BLAS   |       6 |           tg128 |         18.42 ± 0.23 |

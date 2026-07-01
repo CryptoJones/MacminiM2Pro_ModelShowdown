@@ -1,0 +1,2 @@
+| qwen2 14B Q4_K - Medium        |   8.37 GiB |    14.77 B | MTL,BLAS   |       6 |           pp512 |        147.77 ± 0.05 |
+| qwen2 14B Q4_K - Medium        |   8.37 GiB |    14.77 B | MTL,BLAS   |       6 |           tg128 |         17.48 ± 0.01 |

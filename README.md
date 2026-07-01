@@ -14,7 +14,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-⚠️ **IN PROGRESS** — 11/12 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
+✅ **COMPLETE.** `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
@@ -25,11 +25,11 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 5 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | 84.1 | — | 34 | 44 |
 | 6 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | — | 16 | — |
 | 7 | Phi-4 | Microsoft | 14B | 82.3 | — | — | — |
-| 8 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
-| 9 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | — | — |
-| 10 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | — | 26 | — |
-| 11 | CodeGemma-7B | Google 2024 | 7B | 50.0 | — | 25 | — |
-| — | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | — | — | — | — |
+| 8 | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | 82.3 | — | 20 | — |
+| 9 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
+| 10 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | — | — |
+| 11 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | — | 26 | — |
+| 12 | CodeGemma-7B | Google 2024 | 7B | 50.0 | — | 25 | — |
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.

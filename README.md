@@ -14,20 +14,20 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-⚠️ **IN PROGRESS** — 10/12 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
+⚠️ **IN PROGRESS** — 9/12 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
 | 🥇 | Qwen3.5-9B | Alibaba 2026 (reasoning/MTP) | 9B | 90.2 | — | 23 | — |
-| 🥈 | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | 88.4 | — | 23 | — |
-| 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | — | 15 | 22 |
-| 4 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | 84.1 | — | 34 | 44 |
-| 5 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | — | — | — |
-| 6 | Phi-4 | Microsoft | 14B | 82.3 | — | — | — |
-| 7 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
-| 8 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | — | — |
-| 9 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | — | 26 | — |
-| 10 | CodeGemma-7B | Google 2024 | 7B | 50.0 | — | 25 | — |
+| 🥈 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | — | 15 | 22 |
+| 🥉 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | 84.1 | — | 34 | 44 |
+| 4 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | — | — | — |
+| 5 | Phi-4 | Microsoft | 14B | 82.3 | — | — | — |
+| 6 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
+| 7 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | — | — |
+| 8 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | — | 26 | — |
+| 9 | CodeGemma-7B | Google 2024 | 7B | 50.0 | — | 25 | — |
+| — | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | — | — | 23 | — |
 | — | gpt-oss-20b | OpenAI | 20B (MoE) | — | — | — | — |
 | — | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | — | — | — | — |
 

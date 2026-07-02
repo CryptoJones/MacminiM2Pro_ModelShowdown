@@ -18,7 +18,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
-| 🥇 | Qwen3.5-9B | Alibaba 2026 (reasoning/MTP) | 9B | 90.2 | — | 25 | 37 |
+| 🥇 | Qwen3.5-9B | Alibaba 2026 (reasoning/MTP) | 9B | 90.2 | 70.7 | 25 | 37 |
 | 🥈 | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | 88.4 | 84.8 | 25 | 37 |
 | 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | — | 17 | 22 |
 | 4 | gpt-oss-20b | OpenAI | 20B (MoE) | 87.2 | — | 52 | — |

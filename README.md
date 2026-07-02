@@ -29,7 +29,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 9 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |
 | 10 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
 | 11 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
-| 12 | CodeGemma-7B | Google 2024 | 7B | 50.0 | — | 29 | 30 |
+| 12 | CodeGemma-7B | Google 2024 | 7B | 50.0 | — | 29 | 31 |
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.

@@ -1,4 +1,0 @@
-humaneval (base tests)
-pass@1:	0.677
-humaneval+ (base + extra tests)
-pass@1:	0.628

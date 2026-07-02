@@ -1,3 +1,3 @@
-Prompt: 21 tokens, 66.676 tokens-per-sec
-Generation: 128 tokens, 37.338 tokens-per-sec
+Prompt: 21 tokens, 21.545 tokens-per-sec
+Generation: 128 tokens, 37.082 tokens-per-sec
 Peak memory: 5.216 GB

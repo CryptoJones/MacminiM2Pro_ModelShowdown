@@ -23,7 +23,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | — | 17 | 22 |
 | 4 | gpt-oss-20b | OpenAI | 20B (MoE) | 87.2 | — | 52 | — |
 | 5 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | 84.1 | 83.5 | 34 | 43 |
-| 6 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | — | 17 | 32 |
+| 6 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | 87.8 | 17 | 32 |
 | 7 | Phi-4 | Microsoft | 14B | 82.3 | — | 17 | — |
 | 8 | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | 82.3 | — | 20 | — |
 | 9 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | — | 69 | 87 |

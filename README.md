@@ -14,11 +14,10 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-🧪 **Qwythos-9B-v2 evaluation in progress.** `—` = not measured; `evaluating` / `queued` cells are actively being filled.
+✅ **Qwythos-9B-v2 evaluation complete.** `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
-| ⏳ | Qwythos-9B-v2 | Empero AI 2026 (Qwen3.5-based reasoning finetune) | 9B | 78.7 | evaluating | 25 | 37 |
 | 🥇 | Qwen3.5-9B | Alibaba 2026 (reasoning/MTP) | 9B | 90.2 | 70.7 | 25 | 37 |
 | 🥈 | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | 88.4 | 84.8 | 25 | 37 |
 | 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | 87.2 | 85.4 | 17 | 22 |
@@ -27,10 +26,11 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 6 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | 82.3 | 87.8 | 17 | 32 |
 | 7 | Phi-4 | Microsoft | 14B | 82.3 | 80.5 | 17 | 22 |
 | 8 | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | 82.3 | — | 20 | — |
-| 9 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | 75.6 | 69 | 91 |
-| 10 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
-| 11 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
-| 12 | CodeGemma-7B | Google 2024 | 7B | 50.0 | 50.0 | 29 | 31 |
+| 9 | Qwythos-9B-v2 | Empero AI 2026 (Qwen3.5-based reasoning finetune) | 9B | 78.7 | 75.0 | 25 | 37 |
+| 10 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | 75.6 | 69 | 91 |
+| 11 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
+| 12 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
+| 13 | CodeGemma-7B | Google 2024 | 7B | 50.0 | 50.0 | 29 | 31 |
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.

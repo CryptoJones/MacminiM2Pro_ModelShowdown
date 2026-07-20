@@ -8,13 +8,13 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 1. Which open-weight coding model is best for software engineering that fits **comfortably (≤ ~10 GB peak)** on 16 GB?
 2. Which local runtime hosts it best — **`llama.cpp` (Metal, GGUF)** vs **`MLX` (4-bit)**?
 
-**How:** quality = **EvalPlus HumanEval+** (164 problems, executed, greedy, pass@1); speed = `llama-bench` (llama.cpp) / `mlx_lm` (MLX); 4-bit across the board. See [METHODOLOGY.md](METHODOLOGY.md).
+**How:** quality = **EvalPlus HumanEval+** (164 problems, executed, greedy, pass@1); speed = `llama-bench` (llama.cpp) / `mlx_lm` (MLX); 4-bit except for the native ternary Q2_0 Bonsai build. See [METHODOLOGY.md](METHODOLOGY.md).
 
-> ⚠️ **STATUS: run in progress.** The GGUF pass is filling in; the MLX pass runs after it. `—` = not yet measured. This README is updated as cells complete (auto-committed by the completion watcher).
+> ✅ **STATUS: GGUF pass complete.** Ternary-Bonsai-27B MLX testing is deferred. `—` = not measured.
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-✅ **Qwythos-9B-v2 evaluation complete.** `—` = not measured.
+✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models marked `—`. `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
@@ -28,14 +28,16 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 8 | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | 82.3 | — | 20 | — |
 | 9 | Qwythos-9B-v2 | Empero AI 2026 (Qwen3.5-based reasoning finetune) | 9B | 78.7 | 75.0 | 25 | 37 |
 | 10 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | 75.6 | 69 | 91 |
-| 11 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
-| 12 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
-| 13 | CodeGemma-7B | Google 2024 | 7B | 50.0 | 50.0 | 29 | 31 |
+| 11 | Ternary-Bonsai-27B | Prism ML 2026 (Qwen3.6-based ternary) | 27B | 72.0 | — | 10 | — |
+| 12 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
+| 13 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
+| 14 | CodeGemma-7B | Google 2024 | 7B | 50.0 | 50.0 | 29 | 31 |
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.
 - **Speed leader: DeepSeek-V2-Lite MoE** — ~69/87 t/s, 3–4× the dense models (only ~2.4B params active), but lower quality (76.8 %).
 - **Runtime pattern (so far):** MLX wins generation throughput on every model measured; llama.cpp wins prefill.
+- **Ternary Bonsai 27B:** its native ternary Q2_0 GGUF scored **72.0 % HE+** and generated at **9.83 t/s** (83.97 t/s prompt processing). It fits a full 27B-class model into a 6.66 GiB GGUF, trading speed and benchmark quality for an unusually small footprint.
 - **Gotcha worth noting:** reasoning models were initially scored falsely low (Qwen3.5-9B showed 42.7 %) because EvalPlus's default 768-token cap truncated their `<think>` before the code. Raising it to 4096 fixed it — see METHODOLOGY.
 
-Final model + runtime verdict lands here once the full 11 × 2 matrix is complete.
+The Ternary-Bonsai-27B MLX cell remains open for a future run.

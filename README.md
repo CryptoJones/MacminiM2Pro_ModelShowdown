@@ -10,7 +10,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 **How:** quality = **EvalPlus HumanEval+** (164 problems, executed, greedy, pass@1); speed = `llama-bench` (llama.cpp) / `mlx_lm` (MLX); 4-bit except for the native ternary Q2_0 Bonsai build. See [METHODOLOGY.md](METHODOLOGY.md).
 
-> ✅ **STATUS: GGUF pass complete.** Ternary-Bonsai-27B MLX testing is deferred. `—` = not measured.
+> ✅ **STATUS:** both llama.cpp and MLX measurements are now present in the matrix (`—` = not measured).
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
@@ -28,7 +28,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 8 | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | 82.3 | — | 20 | — |
 | 9 | Qwythos-9B-v2 | Empero AI 2026 (Qwen3.5-based reasoning finetune) | 9B | 78.7 | 75.0 | 25 | 37 |
 | 10 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | 76.8 | 75.6 | 69 | 91 |
-| 11 | Ternary-Bonsai-27B | Prism ML 2026 (Qwen3.6-based ternary) | 27B | 72.0 | — | 10 | — |
+| 11 | Ternary-Bonsai-27B | Prism ML 2026 (Qwen3.6-based ternary) | 27B | 72.0 | 65.9 | 10 | 18 |
 | 12 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
 | 13 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
 | 14 | CodeGemma-7B | Google 2024 | 7B | 50.0 | 50.0 | 29 | 31 |
@@ -37,7 +37,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.
 - **Speed leader: DeepSeek-V2-Lite MoE** — ~69/87 t/s, 3–4× the dense models (only ~2.4B params active), but lower quality (76.8 %).
 - **Runtime pattern (so far):** MLX wins generation throughput on every model measured; llama.cpp wins prefill.
-- **Ternary Bonsai 27B:** its native ternary Q2_0 GGUF scored **72.0 % HE+** and generated at **9.83 t/s** (83.97 t/s prompt processing). It fits a full 27B-class model into a 6.66 GiB GGUF, trading speed and benchmark quality for an unusually small footprint.
+- **Ternary Bonsai 27B:** its native ternary Q2_0 GGUF scored **72.0 % HE+** at **9.83 t/s** (83.97 t/s prompt processing), while MLX scored **65.9 % HE+** at **17.8 t/s**. It fits a full 27B-class model into a 6.66 GiB GGUF, trading speed and benchmark quality for an unusually small footprint.
 - **Gotcha worth noting:** reasoning models were initially scored falsely low (Qwen3.5-9B showed 42.7 %) because EvalPlus's default 768-token cap truncated their `<think>` before the code. Raising it to 4096 fixed it — see METHODOLOGY.
 
-The Ternary-Bonsai-27B MLX cell remains open for a future run.
+The Ternary-Bonsai-27B MLX cell is now filled from this run (65.9 % HE+, 17.8 t/s).

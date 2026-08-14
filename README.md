@@ -14,7 +14,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models marked `—`. `—` = not measured.
+⚠️ **IN PROGRESS** — 14/15 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |
 |---|---|---|---|---|---|---|---|
@@ -32,6 +32,7 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 | 12 | Gemma-4-12B | Google 2026 | 12B | 68.3 | — | 18 | — |
 | 13 | IBM-Granite-8B | IBM / Red Hat | 8B | 65.2 | 62.2 | 30 | 37 |
 | 14 | CodeGemma-7B | Google 2024 | 7B | 50.0 | 50.0 | 29 | 31 |
+| — | Qwen3.8-27B (UD-IQ2_M) | Alibaba 2026 (dense, multimodal, reasoning) - 2-bit budget-edge | 27B | — | — | — | — |
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.

@@ -23,6 +23,6 @@ Mac mini, Apple **M2 Pro, 16 GB** unified memory, macOS. Homelab archive/stage n
 - Models are downloaded **once on telesto** (sequentially, to avoid HF throttling), then **pulled over LAN** to the Mac between tests. telesto is the archive; the Mac copy is transient and deleted after each model.
 
 ## Quant parity
-4-bit across runtimes (GGUF `Q4_K_M` ≈ MLX 4-bit; gpt-oss uses native MXFP4), except Ternary-Bonsai-27B's native ternary Q2_0 GGUF. Quant schemes differ slightly between runtimes, which is *why* both are measured — quality is not assumed to transfer.
+4-bit across runtimes (GGUF `Q4_K_M` ≈ MLX 4-bit; gpt-oss uses native MXFP4), except two deliberate sub-4-bit entries: Ternary-Bonsai-27B's native ternary Q2_0 GGUF, and Qwen3.8-27B at Unsloth Dynamic `UD-IQ2_M` (10.3 GB) — a 27B dense model has no 4-bit quant that fits 16 GB (`Q4_K_M` is 17.1 GB), so 2-bit is the only way it runs here at all. Read that row as *"can a heavily-quantised 27B beat a comfortable 9B?"*, not as a like-for-like quality comparison. Quant schemes differ slightly between runtimes, which is *why* both are measured — quality is not assumed to transfer.
 
 *Proudly Made in Nebraska. Go Big Red! 🌽 <https://xkcd.com/2347/>*

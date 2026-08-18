@@ -1,0 +1,2 @@
+| qwen35 27B Q4_K - Small        |   9.60 GiB |    27.32 B | MTL,BLAS   |       6 |           pp512 |         74.14 ± 0.13 |
+| qwen35 27B Q4_K - Small        |   9.60 GiB |    27.32 B | MTL,BLAS   |       6 |           tg128 |          7.79 ± 0.04 |

@@ -83,3 +83,17 @@ and discount it. Withdrawing it would hide a measurement that is merely qualifie
 Raw generations survive for only 2 of the 15 models; scratch cleanup removed the rest, so
 their empty counts show `—` and cannot be recovered. Going forward every run is archived into
 `results/raw/` with a provenance manifest in `results/runs/` — see `AGENTS.md`.
+
+## Quantisation is now shown per row
+
+The matrix carries a `quant · size (lcpp)` column. Without it the table invites a false
+comparison — Ternary-Bonsai-27B at Q2_0 (6.66 GiB) and Qwen3.8-27B at UD-IQ2_M (9.60 GiB) are
+not competing on the same terms as the Q4_K_M models, and gpt-oss-20b is MXFP4 rather than a
+K-quant at all.
+
+**llama.cpp's reported quant is not always the truth.** It prints the GGUF's nominal
+`file_type`, and Unsloth's "UD-" dynamic quants declare something they are not:
+`Qwen3.8-27B-UD-IQ2_M` reports `Q4_K - Small`, but 9.60 GiB across 27.32 B parameters is
+~2.8 bits/weight — a real Q4_K_S would be roughly 15 GB. `update_readme.py` carries an explicit
+`QUANT_OVERRIDE` for such cases rather than publishing the header's claim. On-disk size is the
+honest cross-check and is shown alongside.

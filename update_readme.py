@@ -37,21 +37,24 @@ for f in glob.glob(R+"/*.evalplus"):
 for f in glob.glob(R+"/*.bench"):
     nm, _ = canon(os.path.basename(f)[:-6]); tg = re.search(r"tg128 *\| *([0-9.]+)", open(f).read())
     if tg: rows.setdefault(nm, {})['tgg'] = round(float(tg.group(1)))
+for f in glob.glob(R+"/*.empties"):
+    nm, mlx = canon(os.path.basename(f)[:-8]); v = open(f).read().strip()
+    if v.isdigit(): rows.setdefault(nm, {})[('em' if mlx else 'eg')] = int(v)
 for f in glob.glob(R+"/*.speed"):
     nm, _ = canon(os.path.basename(f)[:-6]); g = re.search(r"Generation:.*?([0-9.]+) tokens-per-sec", open(f).read())
     if g: rows.setdefault(nm, {})['tgm'] = round(float(g.group(1)))
 def cell(v): return "—" if v is None else (f"{v:.1f}" if isinstance(v,float) else str(v))
 ranked = sorted(META, key=lambda k: -(rows.get(k,{}).get('hg') or rows.get(k,{}).get('hm') or -1))
 medal = {0:"🥇",1:"🥈",2:"🥉"}
-lines = ["| Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) |",
-         "|---|---|---|---|---|---|---|---|"]
+lines = ["| Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) | empty (lcpp) | empty (MLX) |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
 rk = 0
 for k in ranked:
     r = rows.get(k, {}); has = r.get('hg') is not None or r.get('hm') is not None
     badge = medal.get(rk, str(rk+1)) if has else "—"
     if has: rk += 1
     v, p = META[k]
-    lines.append(f"| {badge} | {k} | {v} | {p} | {cell(r.get('hg'))} | {cell(r.get('hm'))} | {cell(r.get('tgg'))} | {cell(r.get('tgm'))} |")
+    lines.append(f"| {badge} | {k} | {v} | {p} | {cell(r.get('hg'))} | {cell(r.get('hm'))} | {cell(r.get('tgg'))} | {cell(r.get('tgm'))} | {cell(r.get('eg'))} | {cell(r.get('em'))} |")
 TABLE = "\n".join(lines)
 done = sum(1 for k in META if rows.get(k,{}).get('hg') is not None)
 status = ("✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models marked `—`."

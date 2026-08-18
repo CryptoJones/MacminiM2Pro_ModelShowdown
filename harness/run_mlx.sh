@@ -35,6 +35,9 @@ mlx_quality(){  # label dir
   rm -f "$ROOT"/humaneval/*_eval_results.json 2>/dev/null
   $PY -m evalplus.evaluate humaneval --samples "$J" 2>&1 | grep -iE "pass@1|humaneval" | tee "$RES/$L-mlx.evalplus"
   pkill -f mlx_lm.server 2>/dev/null; sleep 1
+  # Persist samples + invocation parameters INTO THE REPO (see AGENTS.md).
+  "$REPO/harness/archive_run.sh" "$L" mlx "$ROOT" "$D" \
+    "python -m mlx_lm.server --model <dir> --host 127.0.0.1 --port $PORT" || true
 }
 finish(){  # label
   local L=$1

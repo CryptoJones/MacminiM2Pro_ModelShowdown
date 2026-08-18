@@ -7,7 +7,8 @@ Mirror of the GitHub Issues tab. Every item ↔ a GitHub issue (linked once the 
 - [ ] Complete MLX HumanEval+ pass for all 11 models (full 11 x 2 matrix)
 - [ ] llama-bench + mlx speed/fit for all 11 on both runtimes
 - [ ] Qwen3.8-27B `UD-IQ2_M` (llama.cpp): HumanEval+ pass — **reasoning model, needs the 4096-token cap**
-- [ ] Qwen3.8-27B `UD-IQ2_M` (llama.cpp): llama-bench pp512/tg128 under quiet conditions
+- [x] Qwen3.8-27B `UD-IQ2_M` (llama.cpp): llama-bench pp512/tg128 under quiet conditions — pp512 74.14, tg128 7.79 (2026-08-18, box at 95% idle)
+- [ ] Retry on empty completions; preserve `*.raw.jsonl`; report per-cell empty counts ([#7](https://github.com/CryptoJones/MacminiM2Pro_ModelShowdown/issues/7))
 - [ ] Final verdict: best coding model (quality within ≤10 GB) + best runtime (MLX vs llama.cpp)
 
 ## Done

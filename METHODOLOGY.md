@@ -41,26 +41,30 @@ the decision stays auditable.
 ### The underlying defect: empty responses scored as wrong answers
 
 The harness does not distinguish "the model answered incorrectly" from "the server returned
-nothing." Both count as a failed task. Measured on the two runs whose raw generations survive:
+nothing." Both count as a failed task, so a flaky server silently costs a model points. The
+matrix therefore carries `empty (lcpp)` and `empty (MLX)` columns.
 
-| Run | Empty completions |
-|---|---|
-| Qwythos-9B-v2 (MLX) | 26 / 164 (15.9%) |
-| Qwythos-9B-v2 (llama.cpp) | 8 / 164 (4.9%) |
-| Ternary-Bonsai-27B (MLX) | 33 / 164 (20.1%) |
-| Ternary-Bonsai-27B (llama.cpp) | 33 / 164 (20.1%) |
+Measured on the runs whose raw generations survive:
+
+| Model | empty (llama.cpp) | empty (MLX) |
+|---|---|---|
+| Qwythos-9B-v2 | 8 / 164 (4.9%) | **26 / 164 (15.9%)** |
+| Ternary-Bonsai-27B | **33 / 164 (20.1%)** | 0 / 164 (0%) |
 
 These are **raw**, pre-sanitisation, zero-length responses, not extraction failures.
 
-Comparing which tasks went empty separates two distinct causes:
+**Neither runtime is systematically at fault.** Qwythos is far worse on MLX (21 of its 26
+empties are tasks llama.cpp answered fine); Ternary-Bonsai-27B is the reverse, with 33 empties
+on llama.cpp and *none* on MLX. No task came back empty across all four runs. The effect is
+per-model and hits both runtimes, so empty counts must be published per cell rather than
+attributed to a runtime.
 
-- **Model-deterministic.** Ternary-Bonsai-27B produced the *identical* set of 33 empties on
-  both runtimes. That is the model, not the harness, and scoring them as failures is fair.
-- **Runtime flakiness.** Qwythos overlapped on only 5, leaving **21 MLX-only** empties —
-  `mlx_lm.server` returning nothing for prompts llama.cpp handled. That is noise, and it
-  depresses the MLX column.
-
-Only 3 tasks (HumanEval/32, /47, /132) came back empty in every run measured.
+> **Correction (2026-08-18).** An earlier revision of this section claimed Ternary-Bonsai-27B
+> produced "the identical set of 33 empties on both runtimes," and concluded those were
+> model-deterministic and fairly scored. That was wrong. The glob used to locate the runs
+> matched the llama.cpp directory twice — the MLX ternary run lives under
+> `~/showdown-scratch/mlx_runs/eval/`, not `~/showdown-scratch/eval/` — so the llama.cpp file
+> was compared against itself. Resolve run directories by explicit path, never by wildcard.
 
 **Not the 4096-token cap.** That was checked and ruled out. The cap lives in
 `evalplus/provider/base.py` (`max_new_tokens: int = 4096`) and is passed through
@@ -68,11 +72,14 @@ Only 3 tasks (HumanEval/32, /47, /132) came back empty in every run measured.
 generations show zero unclosed `<think>` blocks, no pile-up at any ceiling, and a *longer*
 median than llama.cpp's (617 vs 570 chars). Nothing was truncated.
 
+### Ternary-Bonsai-27B's llama.cpp score carries 33 empties
+
+Its 72.0 is depressed by ~20 points of non-responses, while its MLX 65.9 has none. The cell is
+**retained rather than withdrawn** — now that the empty counts are published, a reader can see
+and discount it. Withdrawing it would hide a measurement that is merely qualified, not wrong.
+
 ### Known gaps
 
-Raw generations (`*.raw.jsonl`) survive for only 2 of the 15 models; scratch cleanup removed
-the rest. The remaining MLX cells therefore cannot be audited for empty-response contamination.
-They are retained because their runtime gaps are small (≤ 7.3 points, and Nemotron-9B actually
-scores *higher* on MLX), which argues against a systematic pipeline fault — but they carry
-this caveat. Future runs should preserve `*.raw.jsonl` alongside the `.evalplus` summaries and
-retry on empty completions before recording a failure.
+Raw generations survive for only 2 of the 15 models; scratch cleanup removed the rest, so
+their empty counts show `—` and cannot be recovered. Going forward every run is archived into
+`results/raw/` with a provenance manifest in `results/runs/` — see `AGENTS.md`.

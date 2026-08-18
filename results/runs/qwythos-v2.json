@@ -1,0 +1,32 @@
+{
+  "run_id": "qwythos-v2",
+  "label": "qwythos-v2",
+  "runtime": "lcpp",
+  "recorded_at": "2026-08-18T09:38:30.487701-05:00",
+  "provenance": {
+    "harness_script": "harness/run_quality.sh",
+    "harness_git_commit": "3b3ce66",
+    "server_cmd": "",
+    "evalplus_cmd": "python -m evalplus.codegen <model> humaneval --backend openai --base_url http://127.0.0.1:8081/v1 --greedy",
+    "max_new_tokens": 4096,
+    "max_new_tokens_source": "evalplus/provider/base.py (applies to BOTH runtimes)",
+    "archived_retroactively": true,
+    "note": "Archived on 2026-08-18 from surviving scratch output, after the run. server_cmd, model sha256 and the run's own CPU-idle were not captured at the time and are unrecoverable; cpu_idle_pct_at_archive reflects the ARCHIVING moment, not the run. Runs from this point forward capture all of it live."
+  },
+  "model": {
+    "path": "(GGUF, pulled from telesto then deleted \u2014 see harness/finish_all.sh)",
+    "size_bytes": null,
+    "sha256": null
+  },
+  "environment": {
+    "host": "makemake",
+    "machine": "arm64",
+    "os": "26.5.2",
+    "cpu_idle_pct_at_archive": 89.72,
+    "cpu_idle_pct_at_archive_is_not_run_idle": true
+  },
+  "results": {
+    "total_tasks": 164,
+    "empty_completions": 8
+  }
+}

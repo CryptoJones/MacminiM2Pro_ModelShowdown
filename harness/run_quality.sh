@@ -26,4 +26,7 @@ rm -f "$ROOT"/humaneval/*_eval_results.json 2>/dev/null
 "$VENV/bin/python" -m evalplus.evaluate humaneval --samples "$J" 2>&1 \
   | grep -iE "pass@1|humaneval" | tee "$REPO/results/$LABEL.evalplus"
 pkill -f llama-server 2>/dev/null; sleep 2
+# Persist samples + invocation parameters INTO THE REPO (see AGENTS.md). Scratch gets wiped.
+"$REPO/harness/archive_run.sh" "$LABEL" lcpp "$ROOT" "$GGUF" \
+  "llama-server -m <gguf> -ngl 99 -c 4096 --host 127.0.0.1 --port $PORT --jinja" || true
 echo "@@@ $(date +%T) QUALITY-DONE $LABEL -> $(tr '\n' ' ' < "$REPO/results/$LABEL.evalplus")"

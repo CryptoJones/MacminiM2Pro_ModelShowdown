@@ -37,6 +37,21 @@ for f in glob.glob(R+"/*.evalplus"):
 for f in glob.glob(R+"/*.bench"):
     nm, _ = canon(os.path.basename(f)[:-6]); tg = re.search(r"tg128 *\| *([0-9.]+)", open(f).read())
     if tg: rows.setdefault(nm, {})['tgg'] = round(float(tg.group(1)))
+# llama.cpp reports the NOMINAL file_type. Unsloth "UD-" dynamic quants misreport it:
+# Qwen3.8-27B-UD-IQ2_M declares Q4_K_S but is ~2.8 bits/weight (9.60 GiB / 27.32 B).
+# Override those explicitly rather than publishing the header's claim.
+QUANT_OVERRIDE = {"Qwen3.8-27B (UD-IQ2_M)": "UD-IQ2_M"}
+for f in glob.glob(R+"/*.bench"):
+    nm, _ = canon(os.path.basename(f)[:-6])
+    txt = open(f).read()
+    m = re.search(r"\|\s*([^|]*?)\s*\|\s*([0-9.]+)\s*GiB", txt)
+    if m:
+        desc, size = m.group(1), m.group(2)
+        qm = re.search(r"(Q\d[^|]*?|MXFP4[^|]*?|IQ\d[^|]*?|BF16|F16)\s*$", desc)
+        q = qm.group(1).strip() if qm else "?"
+        q = QUANT_OVERRIDE.get(nm, q)
+        q = q.replace("Q4_K - Medium", "Q4_K_M").replace("Q4_K - Small", "Q4_K_S")
+        rows.setdefault(nm, {})['qz'] = f"{q} · {size} GiB"
 for f in glob.glob(R+"/*.empties"):
     nm, mlx = canon(os.path.basename(f)[:-8]); v = open(f).read().strip()
     if v.isdigit(): rows.setdefault(nm, {})[('em' if mlx else 'eg')] = int(v)
@@ -46,15 +61,15 @@ for f in glob.glob(R+"/*.speed"):
 def cell(v): return "—" if v is None else (f"{v:.1f}" if isinstance(v,float) else str(v))
 ranked = sorted(META, key=lambda k: -(rows.get(k,{}).get('hg') or rows.get(k,{}).get('hm') or -1))
 medal = {0:"🥇",1:"🥈",2:"🥉"}
-lines = ["| Rank | Model | Vendor / gen | Params | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) | empty (lcpp) | empty (MLX) |",
-         "|---|---|---|---|---|---|---|---|---|---|"]
+lines = ["| Rank | Model | Vendor / gen | Params | quant · size (lcpp) | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) | empty (lcpp) | empty (MLX) |",
+         "|---|---|---|---|---|---|---|---|---|---|---|"]
 rk = 0
 for k in ranked:
     r = rows.get(k, {}); has = r.get('hg') is not None or r.get('hm') is not None
     badge = medal.get(rk, str(rk+1)) if has else "—"
     if has: rk += 1
     v, p = META[k]
-    lines.append(f"| {badge} | {k} | {v} | {p} | {cell(r.get('hg'))} | {cell(r.get('hm'))} | {cell(r.get('tgg'))} | {cell(r.get('tgm'))} | {cell(r.get('eg'))} | {cell(r.get('em'))} |")
+    lines.append(f"| {badge} | {k} | {v} | {p} | {cell(r.get('qz'))} | {cell(r.get('hg'))} | {cell(r.get('hm'))} | {cell(r.get('tgg'))} | {cell(r.get('tgm'))} | {cell(r.get('eg'))} | {cell(r.get('em'))} |")
 TABLE = "\n".join(lines)
 done = sum(1 for k in META if rows.get(k,{}).get('hg') is not None)
 status = ("✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models marked `—`."

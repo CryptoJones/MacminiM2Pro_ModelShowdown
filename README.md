@@ -14,25 +14,37 @@ Local coding-LLM showdown on a **Mac mini (Apple M2 Pro, 16 GB unified memory)**
 
 ## Results — HumanEval+ pass@1 (quality) + generation t/s
 
-⚠️ **IN PROGRESS** — 14/15 models have llama.cpp quality; MLX pass fills the rest. `—` = not measured.
+✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models marked `—`. `—` = not measured.
 
 | Rank | Model | Vendor / gen | Params | quant · size (lcpp) | HE+ (llama.cpp) | HE+ (MLX) | gen t/s (lcpp) | gen t/s (MLX) | empty (lcpp) | empty (MLX) |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 🥇 | Qwen3.5-9B | Alibaba 2026 (reasoning/MTP) | 9B | Q4_K_M · 5.74 GiB | 90.2 | — | 25 | 37 | — | — |
-| 🥈 | ornith-9B | DeepReinforce 2026 (Qwen3.5-based) | 9B | Q4_K_M · 5.23 GiB | 88.4 | 84.8 | 25 | 37 | — | — |
+| 🥇 | Qwen3.5-9B ⁺ | Alibaba 2026 (reasoning/MTP) | 9B | Q4_K_M · 5.74 GiB | 90.2 | — | 25 | 37 | — | — |
+| 🥈 | ornith-9B ⁺ | DeepReinforce 2026 (Qwen3.5-based) | 9B | Q4_K_M · 5.23 GiB | 88.4 | 84.8 | 25 | 37 | — | — |
 | 🥉 | Qwen2.5-Coder-14B | Alibaba 2024 (dedicated coder) | 14B | Q4_K_M · 8.37 GiB | 87.2 | 85.4 | 17 | 22 | — | — |
-| 4 | gpt-oss-20b | OpenAI | 20B (MoE) | MXFP4 MoE · 11.27 GiB | 87.2 | 79.9 | 52 | 57 | — | — |
+| 4 | gpt-oss-20b ⁺ | OpenAI | 20B (MoE) | MXFP4 MoE · 11.27 GiB | 87.2 | 79.9 | 52 | 57 | — | — |
 | 5 | Qwen2.5-Coder-7B | Alibaba 2024 (dedicated coder) | 7B | Q4_K_M · 4.36 GiB | 84.1 | 83.5 | 34 | 43 | — | — |
-| 6 | NVIDIA-Nemotron-9B | NVIDIA 2026 (reasoning) | 9B | Q4_K_M · 6.07 GiB | 82.3 | 87.8 | 17 | 32 | — | — |
+| 6 | NVIDIA-Nemotron-9B ⁺ | NVIDIA 2026 (reasoning) | 9B | Q4_K_M · 6.07 GiB | 82.3 | 87.8 | 17 | 32 | — | — |
 | 7 | Phi-4 | Microsoft | 14B | Q4_K_M · 8.28 GiB | 82.3 | 80.5 | 17 | 22 | — | — |
 | 8 | Gemma-4-12B-Coder | community finetune of Gemma-4-12B (fable5/composer2.5) | 12B | Q4_K_M · 6.86 GiB | 82.3 | — | 20 | — | — | — |
-| 9 | Qwythos-9B-v2 | Empero AI 2026 (Qwen3.5-based reasoning finetune) | 9B | Q4_K_M · 5.33 GiB | 78.7 | — | 25 | 37 | 8 | 26 |
-| 10 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | Q4_K_M · 9.65 GiB | 76.8 | 75.6 | 69 | 91 | — | — |
-| 11 | Ternary-Bonsai-27B | Prism ML 2026 (Qwen3.6-based ternary) | 27B | Q2_0 · 6.66 GiB | 72.0 | 65.9 | 10 | 18 | 33 | 0 |
-| 12 | Gemma-4-12B | Google 2026 | 12B | Q4_K_M · 7.12 GiB | 68.3 | — | 18 | — | — | — |
-| 13 | IBM-Granite-8B | IBM / Red Hat | 8B | Q4_K_M · 4.60 GiB | 65.2 | 62.2 | 30 | 37 | — | — |
-| 14 | CodeGemma-7B | Google 2024 | 7B | Q4_K_M · 4.96 GiB | 50.0 | 50.0 | 29 | 31 | — | — |
-| — | Qwen3.8-27B (UD-IQ2_M) | Alibaba 2026 (dense, multimodal, reasoning) - 2-bit budget-edge | 27B | UD-IQ2_M · 9.60 GiB | — | — | 8 | — | — | — |
+| 9 | Qwen3.8-27B (UD-IQ2_M) ⁺ | Alibaba 2026 (dense, multimodal, reasoning) - 2-bit budget-edge | 27B | UD-IQ2_M · 9.60 GiB | 81.1 | — | 8 | — | 29 | — |
+| 10 | Qwythos-9B-v2 ⁺ | Empero AI 2026 (Qwen3.5-based reasoning finetune) | 9B | Q4_K_M · 5.33 GiB | 78.7 | — | 25 | 37 | 8 | 26 |
+| 11 | DeepSeek-V2-Lite | DeepSeek 2024 (MoE, 2.4B active) | 16B | Q4_K_M · 9.65 GiB | 76.8 | 75.6 | 69 | 91 | — | — |
+| 12 | Ternary-Bonsai-27B ⁺ | Prism ML 2026 (Qwen3.6-based ternary) | 27B | Q2_0 · 6.66 GiB | 72.0 | 65.9 | 10 | 18 | 33 | 0 |
+| 13 | Gemma-4-12B | Google 2026 | 12B | Q4_K_M · 7.12 GiB | 68.3 | — | 18 | — | — | — |
+| 14 | IBM-Granite-8B | IBM / Red Hat | 8B | Q4_K_M · 4.60 GiB | 65.2 | 62.2 | 30 | 37 | — | — |
+| 15 | CodeGemma-7B | Google 2024 | 7B | Q4_K_M · 4.96 GiB | 50.0 | 50.0 | 29 | 31 | — | — |
+
+**⁺ = reasoning model — its score is a FLOOR, not a measurement.**
+
+These models emit a `<think>` block before answering. llama.cpp with `--jinja` splits that into `reasoning_content`, so a model that does not finish thinking within the token cap returns **empty `content`** — and EvalPlus scores an empty response identically to a wrong answer. Confirmed directly against a live server:
+
+```
+HumanEval/10 -> finish_reason=length, content=0 chars, reasoning_content=14451 chars, completion_tokens=4096
+```
+
+The model wrote ~14,500 characters of reasoning and never emitted one character of answer. This is **not** quantisation damage: it reproduces on a vanilla Q5_K_XL build on different hardware. Read the `empty` columns as the size of this effect — Qwen3.8-27B lost **29 of 164** tasks (17.7%) to it, capping its achievable score at 82.3% before any code was judged.
+
+The cap was already raised once (768 -> 4096) after it scored Qwen3.5-9B a false 42.7. 4096 is still not enough for the newest reasoning models. See [#7](https://github.com/CryptoJones/MacminiM2Pro_ModelShowdown/issues/7).
 
 ## Reading so far
 - **Quality leader: Qwen3.5-9B (90.2 % HE+)** — a newest-gen *reasoning* 9B beating the dedicated Qwen2.5-Coder-14B at 2/3 the size. ornith-9B (also Qwen3.5-based) is right behind at 88.4 %.

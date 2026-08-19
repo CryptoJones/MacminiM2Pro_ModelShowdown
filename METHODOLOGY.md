@@ -97,3 +97,39 @@ K-quant at all.
 ~2.8 bits/weight — a real Q4_K_S would be roughly 15 GB. `update_readme.py` carries an explicit
 `QUANT_OVERRIDE` for such cases rather than publishing the header's claim. On-disk size is the
 honest cross-check and is shown alongside.
+
+## Why Qwen3.8-27B is tested at 2-bit, and why 3-bit was rejected
+
+Qwen3.8-27B is **dense, not MoE**, so no 4-bit quant runs on a 16 GB Mac:
+
+| quant | size | runs here? |
+|---|---|---|
+| UD-Q5_K_XL | 19 GB | no |
+| UD-Q4_K_XL | 17 GB | no |
+| Q4_K_M | 16 GB | no |
+| **UD-IQ2_M** | **10.3 GB (9.60 GiB)** | **yes** |
+
+llama.cpp reports this machine's Metal budget as
+`recommendedMaxWorkingSetSize = 14155.78 MB`. Everything at 4-bit and above exceeds it outright.
+
+**A 3-bit middle option was considered and measured, not assumed.**
+`Qwen3.8-27B-UD-IQ3_XXS` (11.91 GB / 11.09 GiB) fits the *Metal* budget —
+11.09 + ~1.1 GiB KV ≈ 12.2 GiB against 13.82 GiB. But physical memory binds first, not Metal.
+Measured live during the 2-bit quality run:
+
+```
+llama-server RSS : 8.06 GiB   (for a 9.60 GiB model)
+swap in use      : 15.6 GB
+```
+
+**~1.5 GiB of the 9.60 GiB model was already paged out**, and pace had degraded from 2.25 to
+4.76 min/problem because of it. A 3-bit model would put 3-4 GiB onto swap instead, pushing a
+164-problem run past 20 hours. The failure mode is thrash, not OOM — which is worse, because
+it completes and quietly costs a day. The file is staged on telesto
+(`~/models/Qwen3.8-27B-UD-IQ3_XXS.gguf`) if a larger-memory machine ever runs it.
+
+**Read the row accordingly.** `Qwen3.8-27B (UD-IQ2_M)` answers *"can a heavily-quantised 27B
+beat a comfortable 9B on a 16 GB box?"* — the same budget-constrained question that admits
+Ternary-Bonsai-27B at `Q2_0 · 6.66 GiB`. Those two are fair peers to each other. Neither is
+like-for-like against the `Q4_K_M` field, and the `quant · size (lcpp)` column exists so that
+is visible at a glance instead of inferred.

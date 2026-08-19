@@ -26,6 +26,16 @@ NAME = {'q14b':'Qwen2.5-Coder-14B','qwen25c-14b':'Qwen2.5-Coder-14B','q7b':'Qwen
  'gemma4-12b':'Gemma-4-12B','phi4':'Phi-4','gptoss-20b':'gpt-oss-20b','gemmacoder':'Gemma-4-12B-Coder',
  'qwythos-v2':'Qwythos-9B-v2','ternary-bonsai-27b':'Ternary-Bonsai-27B',
  'qwen38-27b':'Qwen3.8-27B (UD-IQ2_M)'}
+# Models that emit a <think> reasoning block before their answer. These are at risk of the
+# reasoning-overrun defect: llama.cpp with --jinja splits reasoning out of `content`, so a model
+# that never finishes thinking inside max_new_tokens returns EMPTY content and is scored wrong.
+# Measured on Qwen3.8-27B: HumanEval/10 -> finish_reason=length, content=0 chars,
+# reasoning_content=14451 chars, completion_tokens=4096.
+REASONING = {
+    "Qwen3.5-9B", "ornith-9B", "NVIDIA-Nemotron-9B", "Qwythos-9B-v2",
+    "Ternary-Bonsai-27B", "Qwen3.8-27B (UD-IQ2_M)", "gpt-oss-20b",
+}
+
 def canon(s):
     mlx = s.endswith('-mlx'); s = s[:-4] if mlx else s
     s = s.replace('@llamacpp','').replace('-lcpp','').replace('@MLX','')
@@ -69,8 +79,25 @@ for k in ranked:
     badge = medal.get(rk, str(rk+1)) if has else "—"
     if has: rk += 1
     v, p = META[k]
-    lines.append(f"| {badge} | {k} | {v} | {p} | {cell(r.get('qz'))} | {cell(r.get('hg'))} | {cell(r.get('hm'))} | {cell(r.get('tgg'))} | {cell(r.get('tgm'))} | {cell(r.get('eg'))} | {cell(r.get('em'))} |")
+    mark = " ⁺" if k in REASONING else ""
+    lines.append(f"| {badge} | {k}{mark} | {v} | {p} | {cell(r.get('qz'))} | {cell(r.get('hg'))} | {cell(r.get('hm'))} | {cell(r.get('tgg'))} | {cell(r.get('tgm'))} | {cell(r.get('eg'))} | {cell(r.get('em'))} |")
 TABLE = "\n".join(lines)
+FOOTNOTE = (
+ "**⁺ = reasoning model — its score is a FLOOR, not a measurement.**\n\n"
+ "These models emit a `<think>` block before answering. llama.cpp with `--jinja` splits that "
+ "into `reasoning_content`, so a model that does not finish thinking within the token cap "
+ "returns **empty `content`** — and EvalPlus scores an empty response identically to a wrong "
+ "answer. Confirmed directly against a live server:\n\n"
+ "```\nHumanEval/10 -> finish_reason=length, content=0 chars, "
+ "reasoning_content=14451 chars, completion_tokens=4096\n```\n\n"
+ "The model wrote ~14,500 characters of reasoning and never emitted one character of answer. "
+ "This is **not** quantisation damage: it reproduces on a vanilla Q5_K_XL build on different "
+ "hardware. Read the `empty` columns as the size of this effect — Qwen3.8-27B lost **29 of 164** "
+ "tasks (17.7%) to it, capping its achievable score at 82.3% before any code was judged.\n\n"
+ "The cap was already raised once (768 -> 4096) after it scored Qwen3.5-9B a false 42.7. "
+ "4096 is still not enough for the newest reasoning models. See "
+ "[#7](https://github.com/CryptoJones/MacminiM2Pro_ModelShowdown/issues/7)."
+)
 done = sum(1 for k in META if rows.get(k,{}).get('hg') is not None)
 status = ("✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models marked `—`."
           if done == len(META)
@@ -78,7 +105,7 @@ status = ("✅ **GGUF PASS COMPLETE.** MLX results remain unmeasured for models 
 readme = open(os.path.join(HERE,"README.md")).read()
 # replace everything from the "## Results" header up to (not including) "## Reading"
 readme = re.sub(r"## Results.*?(?=## Reading)",
-                f"## Results — HumanEval+ pass@1 (quality) + generation t/s\n\n{status} `—` = not measured.\n\n{TABLE}\n\n",
+                f"## Results — HumanEval+ pass@1 (quality) + generation t/s\n\n{status} `—` = not measured.\n\n{TABLE}\n\n{FOOTNOTE}\n\n",
                 readme, flags=re.DOTALL)
 open(os.path.join(HERE,"README.md"),"w").write(readme)
 print("README updated;", done, "models with quality")
